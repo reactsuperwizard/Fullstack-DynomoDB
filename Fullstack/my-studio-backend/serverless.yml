@@ -1,0 +1,408 @@
+# Welcome to Serverless!
+#
+# This file is the main config file for your service.
+# It's very minimal at this point and uses default values.
+# You can always add more config options for more control.
+# We've included some commented out config examples here.
+# Just uncomment any of them to get that config option.
+#
+# For full config options, check the docs:
+#    docs.serverless.com
+#
+# Happy Coding!
+
+service: my-studio-backend-2
+# app and org for use with dashboard.serverless.com
+#app: your-app-name
+#org: your-org-name
+plugins:
+  - serverless-dotenv-plugin
+  - serverless-offline
+  - serverless-prune-plugin
+# You can pin your service to only deploy with a specific Serverless version
+# Check out our docs for more details
+frameworkVersion: "2"
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: us-west-1
+  stage: prod
+
+functions:
+  updateUserSettings:
+    handler: api/user.updateUserSettings
+    description: Update User Setting
+    events:
+      - http:
+          path: update_user_setting
+          method: post
+          cors: true
+  setZoomAccount:
+    handler: api/user.setZoomAccount
+    description: set zoom account meta data
+    events:
+      - http:
+          path: set_zoom_account
+          method: post
+          cors: true
+  discntZoomAccount:
+    handler: api/user.discntZoomAccount
+    description: disconnect zoom account
+    events:
+      - http:
+          path: discnt_zoom_acnt
+          method: post
+          cors: true
+  deauthrizeZoomAccount:
+    handler: api/user.deauthrizeZoomAccount
+    description: deauthorize zoom account invoked by the zoom
+    events:
+      - http:
+          path: deauthorize_zoom
+          method: post
+          cors: true
+  uploadAvatar:
+    handler: api/user.uploadAvatar
+    description: Update Avatar From Local
+    events:
+      - http:
+          path: uploadAvatar
+          method: post
+          cors: true
+  setUser:
+    handler: api/user.set
+    memorySize: 128
+    description: Initialize User
+    events:
+      - http:
+          path: set_user
+          method: post
+          cors: true
+  updateUser:
+    handler: api/user.update
+    memorySize: 128
+    description: Update User
+    events:
+      - http:
+          path: update_user
+          method: post
+          cors: true
+  verifyAccount:
+    handler: api/user.verifyAccount
+    memorySize: 128
+    description: Account verification
+    events:
+      - http:
+          path: verify_account
+          method: post
+          cors: true
+  getStudio:
+    handler: api/user.getStudio
+    memorySize: 128
+    description: Get all instructors
+    events:
+      - http:
+          path: get_studio
+          method: post
+          cors: true
+  sendPayoutRequest:
+    handler: api/user.sendPayoutRequest
+    memorySize: 128
+    description: Send payout request
+    events:
+      - http:
+          path: send_payout_request
+          method: post
+          cors: true
+  setCustomer:
+    handler: api/customer.set
+    memorySize: 128
+    description: Initialize User
+    events:
+      - http:
+          path: set_customer
+          method: post
+          cors: true
+  verifyCustomerAccount:
+    handler: api/customer.verifyAccount
+    memorySize: 128
+    description: Customer Account verification
+    events:
+      - http:
+          path: verify_customer_account
+          method: post
+          cors: true
+  sendMsgInstructor:
+    handler: api/customer.sendMsgInstructor
+    memorySize: 128
+    description: send msg to instructor
+    events:
+      - http:
+          path: send_msg_instructor
+          method: post
+          cors: true
+  getAllEvents:
+    handler: api/customer.getAllEvents
+    memorySize: 128
+    description: Get all events for customers
+    events:
+      - http:
+          path: get_all_events
+          method: post
+          cors: true
+  getEventById:
+    handler: api/customer.getEventById
+    memorySize: 128
+    description: Get Event Details
+    events:
+      - http:
+          path: get_event_by_id
+          method: post
+          cors: true
+  uploadCustomerAvatar:
+    handler: api/customer.uploadAvatar
+    description: Update Customer Avatar From Local
+    events:
+      - http:
+          path: upload_customer_avatar
+          method: post
+          cors: true
+  updateCustomer:
+    handler: api/customer.update
+    memorySize: 128
+    description: Update Customer
+    events:
+      - http:
+          path: update_customer
+          method: post
+          cors: true
+  getInstructorData:
+    handler: api/customer.getInstructorData
+    memorySize: 128
+    description: Get Instructor data
+    events:
+      - http:
+          path: get_instructor_data
+          method: post
+          cors: true
+  createClass:
+    handler: api/class.create
+    memorySize: 128
+    description: Create Class
+    events:
+      - http:
+          path: create_class
+          method: post
+          cors: true
+  updateClass:
+    handler: api/class.update
+    memorySize: 128
+    description: Update Class
+    events:
+      - http:
+          path: update_class
+          method: post
+          cors: true
+  uploadClassImage:
+    handler: api/class.uploadClassImage
+    description: Update Class Image From Local
+    events:
+      - http:
+          path: upload_class_image
+          method: post
+          cors: true
+  getClasses:
+    handler: api/class.get_all
+    memorySize: 128
+    description: Get All Class
+    events:
+      - http:
+          path: get_classes
+          method: post
+          cors: true
+  deleteClass:
+    handler: api/class.delete
+    memorySize: 128
+    description: Delete Class
+    events:
+      - http:
+          path: delete_class
+          method: post
+          cors: true
+  createEvent:
+    handler: api/event.create
+    memorySize: 128
+    description: Create Event
+    events:
+      - http:
+          path: create_event
+          method: post
+          cors: true
+  getEvents:
+    handler: api/event.getEvents
+    memorySize: 128
+    description: Get All Events by instructor ID
+    events:
+      - http:
+          path: get_events
+          method: post
+          cors: true
+  deleteEvent:
+    handler: api/event.delete
+    memorySize: 128
+    description: Delete Event
+    events:
+      - http:
+          path: delete_event
+          method: post
+          cors: true
+  cancelEvent:
+    handler: api/customer.cancelEvent
+    memorySize: 128
+    description: Cancel the Event by customer
+    events:
+      - http:
+          path: cancel_event
+          method: post
+          cors: true
+  updateEvent:
+    handler: api/event.update
+    memorySize: 128
+    description: Update Event
+    events:
+      - http:
+          path: update_event
+          method: post
+          cors: true
+  getClientSecret:
+    handler: api/payment.getClientSecret
+    description: Get the client secret
+    events:
+      - http:
+          path: get_client_secret
+          method: post
+          cors: true
+  purchaseEvent:
+    handler: api/payment.purchaseEvent
+    description: Get the client secret
+    events:
+      - http:
+          path: purchase_event
+          method: post
+          cors: true
+  getPayouts:
+    handler: api/payment.getPayouts
+    description: Get the Payouts of instructors
+    events:
+      - http:
+          path: get_payouts
+          method: post
+          cors: true
+  getFinancialMetaData:
+    handler: api/payment.getFinancialMetaData
+    description: Get financial meta data
+    events:
+      - http:
+          path: get_financial_data
+          method: post
+          cors: true
+  sendNotification:
+    handler: api/customer.sendNotification
+    description: Send notification to the user
+    events:
+      - http:
+          path: send_notification
+          method: post
+          cors: true
+  deleteAllFirebaseUsers:
+    handler: utils/firebaseAPI.deleteUsers
+    description: delete firebase users authorized
+    events:
+      - http:
+          path: del_firebase_users
+          method: post
+          cors: true
+# you can overwrite defaults here
+#  stage: dev
+#  region: us-east-1
+
+# you can add statements to the Lambda function's IAM Role here
+#  iamRoleStatements:
+#    - Effect: "Allow"
+#      Action:
+#        - "s3:ListBucket"
+#      Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
+#    - Effect: "Allow"
+#      Action:
+#        - "s3:PutObject"
+#      Resource:
+#        Fn::Join:
+#          - ""
+#          - - "arn:aws:s3:::"
+#            - "Ref" : "ServerlessDeploymentBucket"
+#            - "/*"
+
+# you can define service wide environment variables here
+#  environment:
+#    variable1: value1
+
+# you can add packaging information here
+#package:
+#  include:
+#    - include-me.js
+#    - include-me-dir/**
+#  exclude:
+#    - exclude-me.js
+#    - exclude-me-dir/**
+#    The following are a few example events you can configure
+#    NOTE: Please make sure to change your handler code to work with those events
+#    Check the event documentation for details
+#    events:
+#      - http:
+#          path: users/create
+#          method: get
+#      - websocket: $connect
+#      - s3: ${env:BUCKET}
+#      - schedule: rate(10 minutes)
+#      - sns: greeter-topic
+#      - stream: arn:aws:dynamodb:region:XXXXXX:table/foo/stream/1970-01-01T00:00:00.000
+#      - alexaSkill: amzn1.ask.skill.xx-xx-xx-xx
+#      - alexaSmartHome: amzn1.ask.skill.xx-xx-xx-xx
+#      - iot:
+#          sql: "SELECT * FROM 'some_topic'"
+#      - cloudwatchEvent:
+#          event:
+#            source:
+#              - "aws.ec2"
+#            detail-type:
+#              - "EC2 Instance State-change Notification"
+#            detail:
+#              state:
+#                - pending
+#      - cloudwatchLog: '/aws/lambda/hello'
+#      - cognitoUserPool:
+#          pool: MyUserPool
+#          trigger: PreSignUp
+#      - alb:
+#          listenerArn: arn:aws:elasticloadbalancing:us-east-1:XXXXXX:listener/app/my-load-balancer/50dc6c495c0c9188/
+#          priority: 1
+#          conditions:
+#            host: example.com
+#            path: /hello
+
+#    Define function environment variables here
+#    environment:
+#      variable2: value2
+
+# you can add CloudFormation resource templates here
+#resources:
+#  Resources:
+#    NewResource:
+#      Type: AWS::S3::Bucket
+#      Properties:
+#        BucketName: my-new-bucket
+#  Outputs:
+#     NewOutput:
+#       Description: "Description for the output"
+#       Value: "Some output value"
